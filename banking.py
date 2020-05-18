@@ -28,8 +28,3 @@ class Account:
         else:
             self.balance -= int(cash)
             print('withdrawal successful')
-
-
-lucas = Account('Lucas', 'Lin', 'American', 100)
-lucas.withdraw()
-print(lucas)
