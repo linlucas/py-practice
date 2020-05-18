@@ -10,16 +10,17 @@ class Account:
             .format(self.first_name, self.last_name, self.nationality, self.balance)
 
     def get_name(self):
-        name = input('please enter your name: ')
-        name = name.split()
-        self.first_name = name[0]
-        self.last_name = name[1]
+        full_name = input('please enter your name: ')
+        full_name = full_name.split()
+        self.first_name = full_name[0]
+        self.last_name = full_name[1]
 
     def get_nationality(self):
         self.nationality = input('please enter your nationality: ')
 
     def deposit(self):
-        self.balance += input('how much money would you like to deposit?\n')
+        cash = input('how much money would you like to deposit?\n')
+        self.balance += int(cash)
 
     def withdraw(self):
         cash = input('how much money would you like to withdraw?\n')
@@ -28,3 +29,36 @@ class Account:
         else:
             self.balance -= int(cash)
             print('withdrawal successful')
+
+
+bank = []
+while True:
+    print('Hi, welcome to the bank!\nPlease choose from the following options:')
+    print('1: Create an account')
+    print('2: Deposit money')
+    print('3: Withdraw money')
+    print('4: Close account')
+    response = input()
+    response = int(response)
+
+    if response == 1:
+        this = Account()
+        this.get_name()
+        this.get_nationality()
+        print('Account created!')
+        bank.append(this)
+        this.deposit()
+    if 2 <= response <= 4:
+        name = input('What is your last name?\n')
+        for account in bank:
+            if account.last_name == name:
+                if response == 2:
+                    account.deposit()
+                if response == 3:
+                    account.withdraw()
+                if response == 4:
+                    bank.remove(account)
+
+    response = input('Would you like to leave? y/n\n')
+    if response == 'y':
+        break
